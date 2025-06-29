@@ -19,5 +19,5 @@ jobs:
           server: hosting222400.a440f.netcup.net
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /daniel-hackl.com/
+          server-dir: /daniel-hackl.com/httpdocs/
           local-dir: ./
