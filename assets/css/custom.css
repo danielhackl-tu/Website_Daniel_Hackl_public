@@ -1599,3 +1599,57 @@
     height: 250px;
   }
 }
+
+/* Mobile-specific fixes for engagement section main image overlay */
+@media (max-width: 767.98px) {
+  .engagement-image-container .image-overlay {
+    position: static !important;
+    transform: none !important;
+    background: rgba(0, 115, 186, 0.9) !important;
+    color: white !important;
+    margin-top: 0 !important;
+    padding: 15px 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .engagement-image-container .overlay-content {
+    color: white !important;
+  }
+  
+  .engagement-image-container .overlay-content i {
+    color: white !important;
+  }
+  
+  /* Ensure proper spacing between image and overlay */
+  .engagement-image-container {
+    margin-bottom: 0 !important;
+  }
+  
+  /* Remove any border radius from bottom of image container to ensure seamless connection */
+  .engagement-image-container .swiper,
+  .engagement-image-container .engagement-image {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  /* Make sure overlay connects seamlessly */
+  .engagement-image-container .image-overlay {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .engagement-image-container .image-overlay {
+    padding: 25px 20px;
+  }
+}
+
+/* Ensure desktop styles remain unchanged */
+@media (min-width: 992px) {
+  .engagement-image-container .image-overlay {
+    /* Desktop styles remain as they are */
+  }
+}
