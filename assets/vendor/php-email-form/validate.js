@@ -8,7 +8,7 @@
 
   let forms = document.querySelectorAll('.php-email-form');
 
-  forms.forEach( function(e) {
+  forms.forEach(function(e) {
     e.addEventListener('submit', function(event) {
       event.preventDefault();
 
@@ -17,7 +17,7 @@
       let action = thisForm.getAttribute('action');
       let recaptcha = thisForm.getAttribute('data-recaptcha-site-key');
       
-      if( ! action ) {
+      if(!action) {
         displayError(thisForm, 'The form action property is not set!');
         return;
       }
@@ -26,10 +26,10 @@
       thisForm.querySelector('.error-message').classList.remove('d-block');
       thisForm.querySelector('.sent-message').classList.remove('d-block');
 
-      let formData = new FormData( thisForm );
+      let formData = new FormData(thisForm);
 
-      if ( recaptcha ) {
-        if(typeof grecaptcha !== "undefined" ) {
+      if(recaptcha) {
+        if(typeof grecaptcha !== "undefined") {
           grecaptcha.ready(function() {
             try {
               grecaptcha.execute(recaptcha, {action: 'php_email_form_submit'})
@@ -58,19 +58,24 @@
     })
     .then(response => {
       thisForm.querySelector('.loading').classList.remove('d-block');
-      if( response.ok ) {
-        return response.text();
+      
+      // Check if response is successful (status 200-299)
+      if(response.ok) {
+        // Success response - show in success message box
+        return response.text().then(text => {
+          thisForm.querySelector('.sent-message').innerHTML = text;
+          thisForm.querySelector('.sent-message').classList.add('d-block');
+          thisForm.reset();
+        });
       } else {
-        throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
+        // Error response - show in error message box
+        return response.text().then(text => {
+          displayError(thisForm, text || `HTTP Error: ${response.status} ${response.statusText}`);
+        });
       }
     })
-    .then(text => {
-      thisForm.querySelector('.sent-message').innerHTML = text;
-      thisForm.querySelector('.sent-message').classList.add('d-block');
-      thisForm.reset(); 
-    })
     .catch((error) => {
-      displayError(thisForm, error);
+      displayError(thisForm, error.message || 'An error occurred while sending the message.');
     });
   }
 
