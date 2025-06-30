@@ -1263,10 +1263,10 @@
 }
 
 /* Debug styling - remove after fixing */
-.engagement .swiper-slide {
+/* .engagement .swiper-slide {
   border: 1px solid rgba(255, 0, 0, 0.1); /* Temporary red border to see slide boundaries */
-  min-height: 400px;
-}
+  /* min-height: 400px;
+} */ */
 
 /* Header Layout - Clean and Responsive */
 .header .container-fluid {
