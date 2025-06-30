@@ -38,20 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_body .= "Message:\n$message\n";
 
     // Set email headers
-    $headers = "From: noreply@danielhackl.com\r\n";
+    $headers = "From: noreply@daniel-hackl.com\r\n";
     $headers .= "Reply-To: $email\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
     // Send the email
     if (mail($to, $email_subject, $email_body, $headers)) {
+        // Return success with 200 status code
         http_response_code(200);
         echo "Your message has been sent successfully!";
-        exit;
     } else {
+        // Return error with 500 status code
         http_response_code(500);
         echo "There was a problem sending the email. Please try again later.";
-        exit;
     }
 } else {
     http_response_code(405);
