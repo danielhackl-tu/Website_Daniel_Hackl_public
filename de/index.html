@@ -121,7 +121,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-      <img src="../assets/images/about/Background.gif" alt="" data-aos="fade-in" loading="eager">
+      <img src="../assets/images/about/Background_16frames.gif" alt="" data-aos="fade-in" loading="eager">
       <div class="container d-flex flex-column align-items-center justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
         <h2>Willkommen!</h2>
         <h1>Ich bin Daniel Hackl</h1>
@@ -1250,212 +1250,198 @@
   <!-- Main JS File -->
   <script src="../assets/js/main.js"></script>
 
-  <!-- Swiper Initialization Scripts -->
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    
-    // Initialize ANS Leadership Swiper Gallery
-    const ansLeadershipSwiper = new Swiper('.ans-leadership-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 0,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      effect: 'slide',
-      speed: 600,
-      navigation: {
-        nextEl: '.ans-leadership-swiper .swiper-button-next',
-        prevEl: '.ans-leadership-swiper .swiper-button-prev',
-      },
-      pagination: {
-        el: '.ans-leadership-swiper .swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      keyboard: { enabled: true },
-      touchRatio: 1,
-      touchAngle: 45,
-      watchSlidesProgress: true,
-      preloadImages: false,
-      lazy: true,
-    });
+<!-- Single Swiper initialization script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Initialize ANS Leadership Swiper Gallery
+  const ansLeadershipSwiper = new Swiper('.ans-leadership-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    effect: 'slide',
+    speed: 600,
+    navigation: {
+      nextEl: '.ans-leadership-swiper .swiper-button-next',
+      prevEl: '.ans-leadership-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.ans-leadership-swiper .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: { enabled: true },
+    touchRatio: 1,
+    touchAngle: 45,
+    watchSlidesProgress: true,
+    preloadImages: false,
+    lazy: true,
+  });
 
-    // Initialize IYNC Swiper Gallery
-    const iyncSwiper = new Swiper('.iync-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 0,
-      loop: true,
-      autoplay: {
-        delay: 4500,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      effect: 'slide',
-      speed: 600,
-      navigation: {
-        nextEl: '.iync-swiper .swiper-button-next',
-        prevEl: '.iync-swiper .swiper-button-prev',
-      },
-      pagination: {
-        el: '.iync-swiper .swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      keyboard: { enabled: true },
-      touchRatio: 1,
-      touchAngle: 45,
-      watchSlidesProgress: true,
-      preloadImages: false,
-      lazy: true,
-    });
+  // Initialize IYNC Swiper Gallery
+  const iyncSwiper = new Swiper('.iync-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    effect: 'slide',
+    speed: 600,
+    navigation: {
+      nextEl: '.iync-swiper .swiper-button-next',
+      prevEl: '.iync-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.iync-swiper .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: { enabled: true },
+    touchRatio: 1,
+    touchAngle: 45,
+    watchSlidesProgress: true,
+    preloadImages: false,
+    lazy: true,
+  });
 
-    // Initialize DACH Conference Swiper Gallery
-    const dachSwiper = new Swiper('.dach-conference-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 0,
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      effect: 'slide',
-      speed: 600,
-      navigation: {
-        nextEl: '.dach-conference-swiper .swiper-button-next',
-        prevEl: '.dach-conference-swiper .swiper-button-prev',
-      },
-      pagination: {
-        el: '.dach-conference-swiper .swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      keyboard: { enabled: true },
-      touchRatio: 1,
-      touchAngle: 45,
-      watchSlidesProgress: true,
-      preloadImages: false,
-      lazy: true,
+  // Initialize DACH Conference Swiper Gallery
+  const dachSwiper = new Swiper('.dach-conference-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    effect: 'slide',
+    speed: 600,
+    navigation: {
+      nextEl: '.dach-conference-swiper .swiper-button-next',
+      prevEl: '.dach-conference-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.dach-conference-swiper .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: { enabled: true },
+    touchRatio: 1,
+    touchAngle: 45,
+    watchSlidesProgress: true,
+    preloadImages: false,
+    lazy: true,
+  });
+
+  // Initialize Conferences Swiper Gallery
+  const conferencesSwiper = new Swiper('.conferences-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 4700,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    effect: 'slide',
+    speed: 600,
+    navigation: {
+      nextEl: '.conferences-swiper .swiper-button-next',
+      prevEl: '.conferences-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.conferences-swiper .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: { enabled: true },
+    touchRatio: 1,
+    touchAngle: 45,
+    watchSlidesProgress: true,
+    preloadImages: false,
+    lazy: true,
+  });
+
+  // Initialize NPP Tours Swiper Gallery
+  const nppToursSwiper = new Swiper('.npp-tours-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 5200,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    effect: 'slide',
+    speed: 600,
+    navigation: {
+      nextEl: '.npp-tours-swiper .swiper-button-next',
+      prevEl: '.npp-tours-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.npp-tours-swiper .swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: { enabled: true },
+    touchRatio: 1,
+    touchAngle: 45,
+    watchSlidesProgress: true,
+    preloadImages: false,
+    lazy: true,
+  });
+  
+  // Pause autoplay when hovering over containers
+  const containers = document.querySelectorAll('.engagement-image-container');
+  containers.forEach(container => {
+    container.addEventListener('mouseenter', () => {
+      if (container.querySelector('.ans-leadership-swiper')) ansLeadershipSwiper.autoplay.stop();
+      if (container.querySelector('.iync-swiper')) iyncSwiper.autoplay.stop();
+      if (container.querySelector('.dach-conference-swiper')) dachSwiper.autoplay.stop();
+      if (container.querySelector('.conferences-swiper')) conferencesSwiper.autoplay.stop();
+      if (container.querySelector('.npp-tours-swiper')) nppToursSwiper.autoplay.stop();
     });
     
-    // Initialize Conferences Swiper Gallery
-    const conferencesSwiper = new Swiper('.conferences-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 0,
-      loop: true,
-      autoplay: {
-        delay: 4700,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      effect: 'slide',
-      speed: 600,
-      navigation: {
-        nextEl: '.conferences-swiper .swiper-button-next',
-        prevEl: '.conferences-swiper .swiper-button-prev',
-      },
-      pagination: {
-        el: '.conferences-swiper .swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      keyboard: { enabled: true },
-      touchRatio: 1,
-      touchAngle: 45,
-      watchSlidesProgress: true,
-      preloadImages: false,
-      lazy: true,
-    });
-
-    // Initialize NPP Tours Swiper Gallery
-    const nppToursSwiper = new Swiper('.npp-tours-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 0,
-      loop: true,
-      autoplay: {
-        delay: 5200,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      effect: 'slide',
-      speed: 600,
-      navigation: {
-        nextEl: '.npp-tours-swiper .swiper-button-next',
-        prevEl: '.npp-tours-swiper .swiper-button-prev',
-      },
-      pagination: {
-        el: '.npp-tours-swiper .swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-      },
-      keyboard: { enabled: true },
-      touchRatio: 1,
-      touchAngle: 45,
-      watchSlidesProgress: true,
-      preloadImages: false,
-      lazy: true,
-    });
-    
-    // Pause autoplay when hovering over containers
-    const containers = document.querySelectorAll('.engagement-image-container');
-    containers.forEach(container => {
-      container.addEventListener('mouseenter', () => {
-        if (container.querySelector('.ans-leadership-swiper')) ansLeadershipSwiper.autoplay.stop();
-        if (container.querySelector('.iync-swiper')) iyncSwiper.autoplay.stop();
-        if (container.querySelector('.dach-conference-swiper')) dachSwiper.autoplay.stop();
-        if (container.querySelector('.conferences-swiper')) conferencesSwiper.autoplay.stop();
-        if (container.querySelector('.npp-tours-swiper')) nppToursSwiper.autoplay.stop();
-      });
-      
-      container.addEventListener('mouseleave', () => {
-        if (container.querySelector('.ans-leadership-swiper')) ansLeadershipSwiper.autoplay.start();
-        if (container.querySelector('.iync-swiper')) iyncSwiper.autoplay.start();
-        if (container.querySelector('.dach-conference-swiper')) dachSwiper.autoplay.start();
-        if (container.querySelector('.conferences-swiper')) conferencesSwiper.autoplay.start();
-        if (container.querySelector('.npp-tours-swiper')) nppToursSwiper.autoplay.start();
-      });
+    container.addEventListener('mouseleave', () => {
+      if (container.querySelector('.ans-leadership-swiper')) ansLeadershipSwiper.autoplay.start();
+      if (container.querySelector('.iync-swiper')) iyncSwiper.autoplay.start();
+      if (container.querySelector('.dach-conference-swiper')) dachSwiper.autoplay.start();
+      if (container.querySelector('.conferences-swiper')) conferencesSwiper.autoplay.start();
+      if (container.querySelector('.npp-tours-swiper')) nppToursSwiper.autoplay.start();
     });
   });
-  </script>
+});
+</script>
 
-  <script>
+<script>
 // Update active language indicators
 document.addEventListener('DOMContentLoaded', function() {
-    // Set German as active since we're on the German page
-    const enLinks = document.querySelectorAll('#lang-en, #mobile-lang-en');
-    const deLinks = document.querySelectorAll('#lang-de, #mobile-lang-de');
+    const currentLang = window.LanguageRedirect ? window.LanguageRedirect.getCurrentLanguage() : 'en';
     
-    enLinks.forEach(link => link.classList.remove('active'));
-    deLinks.forEach(link => link.classList.add('active'));
+    // Update desktop switcher
+    document.querySelectorAll('.lang-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    const activeLangLink = document.getElementById('lang-' + currentLang);
+    if (activeLangLink) {
+        activeLangLink.classList.add('active');
+    }
+    
+    // Update mobile switcher
+    document.querySelectorAll('.mobile-lang-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    const activeMobileLangLink = document.getElementById('mobile-lang-' + currentLang);
+    if (activeMobileLangLink) {
+        activeMobileLangLink.classList.add('active');
+    }
 });
-
-// Language switching function for index page
-function switchIndexLanguage(targetLang) {
-    if (targetLang === 'en') {
-        // Switch to English version (go up one directory to root)
-        window.location.href = '../index.html';
-    } else {
-        // Already on German version, just update visual state
-        updateLanguageVisualState('de');
-    }
-}
-
-// Function to update visual state of language switcher
-function updateLanguageVisualState(currentLang) {
-    const enLinks = document.querySelectorAll('#lang-en, #mobile-lang-en');
-    const deLinks = document.querySelectorAll('#lang-de, #mobile-lang-de');
-    
-    if (currentLang === 'de') {
-        enLinks.forEach(link => link.classList.remove('active'));
-        deLinks.forEach(link => link.classList.add('active'));
-    } else {
-        deLinks.forEach(link => link.classList.remove('active'));
-        enLinks.forEach(link => link.classList.add('active'));
-    }
-}
 </script>
-</body>
-</html>
