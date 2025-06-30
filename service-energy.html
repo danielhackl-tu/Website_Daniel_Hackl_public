@@ -37,18 +37,61 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <h1 class="sitename">Daniel Hackl</h1>
       </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html#hero">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services" class="active">Services</a></li>
-          <li><a href="index.html#resume">Resume</a></li>
-          <li><a href="index.html#engagement">Engagement</a></li>
-          <li><a href="index.html#portfolio">Portfolio</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+      
+      <!-- Navigation and Language Switcher Container -->
+      <div class="nav-container d-flex align-items-center">
+        
+        <!-- Main Navigation -->
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <!-- Mobile Language Switcher - Move to TOP of menu -->
+            <div class="mobile-lang-switcher d-xl-none">
+              <li class="mobile-lang-item">
+                <a href="#" onclick="switchServiceLanguage('en'); return false;" 
+                   class="mobile-lang-link active" id="mobile-lang-en">
+                  <span class="flag">🇺🇸</span>
+                  <span>English</span>
+                </a>
+              </li>
+              <li class="mobile-lang-item">
+                <a href="#" onclick="switchServiceLanguage('de'); return false;" 
+                   class="mobile-lang-link" id="mobile-lang-de">
+                  <span class="flag">🇩🇪</span>
+                  <span>Deutsch</span>
+                </a>
+              </li>
+              <div class="mobile-lang-divider"></div>
+            </div>
+            
+            <!-- Navigation Items -->
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services" class="active">Services</a></li>
+            <li><a href="index.html#resume">Resume</a></li>
+            <li><a href="index.html#engagement">Engagement</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        
+        <!-- Desktop Language Switcher - Only on Large Screens -->
+        <div class="language-switcher d-none d-xl-flex">
+          <a href="#" onclick="switchServiceLanguage('en'); return false;" 
+             class="lang-link active" title="English" 
+             id="lang-en">
+            <span class="flag">🇺🇸</span>
+            <span class="lang-text">EN</span>
+          </a>
+          <a href="#" onclick="switchServiceLanguage('de'); return false;" 
+             class="lang-link" title="Deutsch"
+             id="lang-de">
+            <span class="flag">🇩🇪</span>
+            <span class="lang-text">DE</span>
+          </a>
+        </div>
+        
+      </div>
     </div>
   </header>
 
@@ -355,6 +398,37 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <!-- Service Page Language Switching Script -->
+  <script>
+  // Service page language switching function
+  function switchServiceLanguage(targetLang) {
+    const currentPath = window.location.pathname;
+    const currentFilename = currentPath.split('/').pop();
+    
+    // Extract service type from filename (e.g., 'service-energy.html' -> 'energy')
+    const serviceMatch = currentFilename.match(/service-(.+)\.html/);
+    const serviceType = serviceMatch ? serviceMatch[1] : 'energy';
+    
+    if (targetLang === 'de') {
+      // Switch to German version
+      window.location.href = `de/service-${serviceType}.html`;
+    } else {
+      // Switch to English version (already on English)
+      // Could add logic here if needed
+    }
+  }
+
+  // Update active language indicators on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set English as active
+    const enLinks = document.querySelectorAll('#lang-en, #mobile-lang-en');
+    const deLinks = document.querySelectorAll('#lang-de, #mobile-lang-de');
+    
+    enLinks.forEach(link => link.classList.add('active'));
+    deLinks.forEach(link => link.classList.remove('active'));
+  });
+  </script>
 
   <!-- Dynamic Table of Contents Script -->
   <script>

@@ -37,18 +37,61 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <h1 class="sitename">Daniel Hackl</h1>
       </a>
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html#hero">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services" class="active">Services</a></li>
-          <li><a href="index.html#resume">Resume</a></li>
-          <li><a href="index.html#engagement">Engagement</a></li>
-          <li><a href="index.html#portfolio">Portfolio</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+      
+      <!-- Navigation and Language Switcher Container -->
+      <div class="nav-container d-flex align-items-center">
+        
+        <!-- Main Navigation -->
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <!-- Mobile Language Switcher - Move to TOP of menu -->
+            <div class="mobile-lang-switcher d-xl-none">
+              <li class="mobile-lang-item">
+                <a href="#" onclick="switchServiceLanguage('en'); return false;" 
+                   class="mobile-lang-link active" id="mobile-lang-en">
+                  <span class="flag">🇺🇸</span>
+                  <span>English</span>
+                </a>
+              </li>
+              <li class="mobile-lang-item">
+                <a href="#" onclick="switchServiceLanguage('de'); return false;" 
+                   class="mobile-lang-link" id="mobile-lang-de">
+                  <span class="flag">🇩🇪</span>
+                  <span>Deutsch</span>
+                </a>
+              </li>
+              <div class="mobile-lang-divider"></div>
+            </div>
+            
+            <!-- Navigation Items -->
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services" class="active">Services</a></li>
+            <li><a href="index.html#resume">Resume</a></li>
+            <li><a href="index.html#engagement">Engagement</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        
+        <!-- Desktop Language Switcher - Only on Large Screens -->
+        <div class="language-switcher d-none d-xl-flex">
+          <a href="#" onclick="switchServiceLanguage('en'); return false;" 
+             class="lang-link active" title="English" 
+             id="lang-en">
+            <span class="flag">🇺🇸</span>
+            <span class="lang-text">EN</span>
+          </a>
+          <a href="#" onclick="switchServiceLanguage('de'); return false;" 
+             class="lang-link" title="Deutsch"
+             id="lang-de">
+            <span class="flag">🇩🇪</span>
+            <span class="lang-text">DE</span>
+          </a>
+        </div>
+        
+      </div>
     </div>
   </header>
 
@@ -260,42 +303,30 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
 
-  <!-- Dynamic Table of Contents Script -->
+  <!-- Language switching functionality -->
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get all service list links and sections
-    const serviceLinks = document.querySelectorAll('.services-list a');
-    const sections = document.querySelectorAll('[id^="superconductors"], [id^="irradiation-effects"], [id^="characterization"], [id^="processing"]');
-    
-    // Function to update active link
-    function updateActiveLink() {
-      let currentSection = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 150; // Offset for header
-        const sectionHeight = section.offsetHeight;
-        const scrollPosition = window.pageYOffset;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          currentSection = section.getAttribute('id');
-        }
-      });
-      
-      // Update active states
-      serviceLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === '#' + currentSection) {
-          link.classList.add('active');
-        }
-      });
+  function switchServiceLanguage(lang) {
+    const currentPage = 'service-materials.html';
+    if (lang === 'de') {
+      window.location.href = 'de/' + currentPage;
+    } else {
+      window.location.href = currentPage;
     }
+  }
+  
+  // Update active language indicators
+  document.addEventListener('DOMContentLoaded', function() {
+    // Update desktop switcher
+    document.querySelectorAll('.lang-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    document.getElementById('lang-en').classList.add('active');
     
-    // Add scroll event listener
-    window.addEventListener('scroll', updateActiveLink);
-    
-    // Call once on load
-    updateActiveLink();
+    // Update mobile switcher
+    document.querySelectorAll('.mobile-lang-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    document.getElementById('mobile-lang-en').classList.add('active');
   });
   </script>
 
