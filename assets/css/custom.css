@@ -1210,37 +1210,62 @@
   box-shadow: 0 2px 8px rgba(0, 115, 186, 0.4);
 }
 
-/* Single image caption styling for non-swiper images - Keep original styling */
-.engagement-image-container .slide-caption {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(0, 115, 186, 0.9);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-  z-index: 10;
+/* Fix for engagement image display issues */
+.engagement .swiper-slide {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  position: relative;
 }
 
-/* Show caption on hover for single images */
-.engagement-image-container:hover .slide-caption {
-  opacity: 1;
-  transform: translateY(0);
+.engagement .swiper-slide img {
+  display: block !important;
+  width: 100% !important;
+  height: 400px !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* Mobile: Always show captions */
-@media (max-width: 768px) {
-  .engagement-image-container .slide-caption {
-    opacity: 1;
-    transform: translateY(0);
-    font-size: 12px;
-    padding: 6px 12px;
-  }
+/* Ensure swiper containers have proper dimensions */
+.engagement .swiper {
+  width: 100% !important;
+  height: 400px !important;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.engagement .swiper-wrapper {
+  height: 100% !important;
+}
+
+/* Fix for missing images - show placeholder */
+.engagement .swiper-slide:empty {
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-style: italic;
+}
+
+.engagement .swiper-slide:empty::after {
+  content: "Image loading...";
+  font-size: 16px;
+  color: #999;
+}
+
+/* Force image loading */
+.engagement .swiper-slide img[loading="lazy"] {
+  loading: eager !important;
+}
+
+/* Debug styling - remove after fixing */
+.engagement .swiper-slide {
+  border: 1px solid rgba(255, 0, 0, 0.1); /* Temporary red border to see slide boundaries */
+  min-height: 400px;
 }
 
 /* Header Layout - Clean and Responsive */
