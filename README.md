@@ -14,9 +14,9 @@ Key Features:
 🎯 Professional showcase of academic and industry experience
 Tech Stack: HTML5, CSS3, JavaScript, PHP, Bootstrap 5, AOS animations, Swiper.js
 
-Development: Built with assistance from GitHub Copilot (Claude Sonnet 4) for enhanced code quality and development efficiency.
+**Development**: Built with assistance from GitHub Copilot (Claude Sonnet 4) for enhanced code quality and development efficiency.
 
-Live Demo: [https://www.daniel-hackl.com/]
+**Live Demo**: [https://www.daniel-hackl.com](https://www.daniel-hackl.com)
 
 Perfect for professionals in STEM fields looking for inspiration or a template for their own portfolio website.
 
