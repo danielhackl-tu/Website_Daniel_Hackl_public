@@ -55,6 +55,8 @@
 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      
+      <!-- Logo -->
       <a href="index.html" class="logo d-flex align-items-center">
         <h1 class="sitename">Daniel Hackl</h1>
       </a>
@@ -69,7 +71,7 @@
             <div class="mobile-lang-switcher d-xl-none">
               <li class="mobile-lang-item">
                 <a href="#" onclick="LanguageRedirect.setLanguage('en'); return false;" 
-                   class="mobile-lang-link active" id="mobile-lang-en">
+                   class="mobile-lang-link" id="mobile-lang-en">
                   <span class="flag">🇺🇸</span>
                   <span>English</span>
                 </a>
@@ -85,13 +87,13 @@
             </div>
             
             <!-- Navigation Items -->
-            <li><a href="index.html#hero">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#services" class="active">Services</a></li>
-            <li><a href="index.html#resume">Resume</a></li>
-            <li><a href="index.html#engagement">Engagement</a></li>
-            <li><a href="index.html#portfolio">Portfolio</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#engagement">Engagement</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -99,7 +101,7 @@
         <!-- Desktop Language Switcher - Only on Large Screens -->
         <div class="language-switcher d-none d-xl-flex">
           <a href="#" onclick="LanguageRedirect.setLanguage('en'); return false;" 
-             class="lang-link active" title="English" 
+             class="lang-link" title="English" 
              id="lang-en">
             <span class="flag">🇺🇸</span>
             <span class="lang-text">EN</span>
@@ -1541,11 +1543,11 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     keyboard: { enabled: true },
     touchRatio: 1,
-    touchAngle:  45,
+    touchAngle: 45,
     watchSlidesProgress: true,
     preloadImages: false,
     lazy: true,
-   });
+  });
   
   // Pause autoplay when hovering over containers
   const containers = document.querySelectorAll('.engagement-image-container');
