@@ -122,7 +122,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-      <img src="assets/images/about/BG_16FPS.gif" alt="" data-aos="fade-in" loading="eager">
+      <img id="hero-bg" src="" alt="" data-src="assets/images/about/BG_16FPS.gif" data-aos="fade-in" loading="lazy" style="opacity: 0;">
       <div class="container d-flex flex-column align-items-center justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
         <h2>Welcome everyone!</h2>
         <h1 class="">I am Daniel Hackl</h1>
@@ -140,8 +140,7 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 justify-content-center">
           <div class="col-lg-4">
-            <!-- Update image path if necessary -->
-            <img src="assets/images/about/portrait.jpg" class="img-fluid" alt="Daniel Hackl Portrait" loading="lazy" width="400" height="500">
+            <img src="" data-src="assets/images/about/portrait.jpg" class="img-fluid portrait-lazy" alt="Daniel Hackl Portrait" loading="lazy" width="400" height="500" style="opacity: 0;">
           </div>
           <div class="col-lg-8 content">
             <!-- Content from old #about -->
@@ -1588,5 +1587,49 @@ document.addEventListener('DOMContentLoaded', function() {
     if (activeMobileLangLink) {
         activeMobileLangLink.classList.add('active');
     }
+});
+</script>
+
+<!-- Lazy loading implementation for hero background and portrait -->
+<script>
+// Lazy loading implementation for hero background and portrait
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to load image with fade-in effect
+  function loadImageWithFade(element, callback) {
+    const img = new Image();
+    img.onload = function() {
+      element.src = img.src;
+      element.style.transition = 'opacity 0.5s ease-in-out';
+      element.style.opacity = '1';
+      if (callback) callback();
+    };
+    img.src = element.getAttribute('data-src');
+  }
+
+  // Load hero background GIF after a short delay to prioritize critical content
+  setTimeout(() => {
+    const heroBg = document.getElementById('hero-bg');
+    if (heroBg) {
+      loadImageWithFade(heroBg);
+    }
+  }, 500);
+
+  // Load portrait when it comes into view or immediately if already visible
+  const portrait = document.querySelector('.portrait-lazy');
+  if (portrait) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadImageWithFade(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
+    
+    observer.observe(portrait);
+  }
 });
 </script>
