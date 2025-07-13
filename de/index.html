@@ -1459,6 +1459,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Lazy loading implementation for hero background and portrait -->
 <script>
+// Optimized lazy loading - fastest possible GIF loading
 document.addEventListener('DOMContentLoaded', function() {
   // Function to load image with fade-in effect
   function loadImageWithFade(element, callback) {
@@ -1472,38 +1473,20 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = element.getAttribute('data-src');
   }
 
-  // Load hero background GIF - improved version with better fallback handling
+  // Optimized hero background GIF loading - no artificial delay, no duplicate loading
   const heroBg = document.getElementById('hero-bg');
   if (heroBg) {
-    // Ensure static image is loaded first
-    const staticImg = new Image();
-    staticImg.onload = function() {
-      // Static image loaded successfully, now try to load GIF
-      const gifImg = new Image();
-      gifImg.onload = function() {
-        // GIF loaded successfully - smooth transition
-        setTimeout(() => {
-          heroBg.style.transition = 'opacity 0.5s ease-in-out';
-          heroBg.src = gifImg.src;
-        }, 1000); // Wait 1 second before transitioning to GIF
-      };
-      gifImg.onerror = function() {
-        console.log('GIF failed to load, keeping static image');
-      };
-      // Start loading GIF in background
-      gifImg.src = heroBg.getAttribute('data-src');
+    // Start loading GIF immediately in background - no validation of static image needed
+    const gifImg = new Image();
+    gifImg.onload = function() {
+      // GIF loaded - replace immediately, no delay
+      heroBg.src = gifImg.src;
     };
-    staticImg.onerror = function() {
-      console.log('Static image failed to load, trying GIF directly');
-      // If static image fails, load GIF directly
-      const gifImg = new Image();
-      gifImg.onload = function() {
-        heroBg.src = gifImg.src;
-      };
-      gifImg.src = heroBg.getAttribute('data-src');
+    gifImg.onerror = function() {
+      console.log('GIF failed to load, keeping static image');
     };
-    // Load static image to ensure it's available
-    staticImg.src = heroBg.src;
+    // Start loading GIF immediately - as fast as possible
+    gifImg.src = heroBg.getAttribute('data-src');
   }
 
   // Load portrait when it comes into view or immediately if already visible
