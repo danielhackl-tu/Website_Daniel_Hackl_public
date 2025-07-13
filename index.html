@@ -122,7 +122,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-      <img id="hero-bg" src="" alt="" data-src="assets/images/about/BG_16FPS.gif" data-aos="fade-in" loading="lazy" style="opacity: 0;">
+      <img id="hero-bg" src="assets/images/about/BG_first_frame.jpg" alt="" data-src="assets/images/about/BG_16FPS.gif" data-aos="fade-in" loading="eager" style="opacity: 1;">
       <div class="container d-flex flex-column align-items-center justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
         <h2>Welcome everyone!</h2>
         <h1 class="">I am Daniel Hackl</h1>
@@ -1606,13 +1606,23 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = element.getAttribute('data-src');
   }
 
-  // Load hero background GIF after a short delay to prioritize critical content
-  setTimeout(() => {
-    const heroBg = document.getElementById('hero-bg');
-    if (heroBg) {
-      loadImageWithFade(heroBg);
-    }
-  }, 500);
+  // Load hero background GIF - immediate loading with static frame fallback
+  const heroBg = document.getElementById('hero-bg');
+  if (heroBg) {
+    // Preload the GIF in background
+    const gifImg = new Image();
+    gifImg.onload = function() {
+      // Smoothly transition from static frame to animated GIF
+      heroBg.style.transition = 'opacity 0.3s ease-in-out';
+      heroBg.style.opacity = '0.7';
+      setTimeout(() => {
+        heroBg.src = gifImg.src;
+        heroBg.style.opacity = '1';
+      }, 150);
+    };
+    // Start loading GIF immediately but don't block initial render
+    gifImg.src = heroBg.getAttribute('data-src');
+  }
 
   // Load portrait when it comes into view or immediately if already visible
   const portrait = document.querySelector('.portrait-lazy');
