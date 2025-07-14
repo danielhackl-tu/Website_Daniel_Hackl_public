@@ -205,11 +205,11 @@
                 <div class="col-lg-5">
                   <div class="row">
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Activity_determination.jpg" class="img-fluid rounded shadow-sm" alt="Aktivitätsbestimmungs-Experiment" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Activity_determination.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Aktivitätsbestimmungs-Experiment" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Aktivitätsbestimmungs-Setup</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Manipulator.jpg" class="img-fluid rounded shadow-sm" alt="Fernbedienung mit Manipulator" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Manipulator.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Fernbedienung mit Manipulator" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Fernbedienungsoperationen</small>
                     </div>
                   </div>
@@ -259,11 +259,11 @@
                 <div class="col-lg-5">
                   <div class="row">
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Gamma_source.jpg" class="img-fluid rounded shadow-sm" alt="Gamma-Quellen-Setup" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Gamma_source.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Gamma-Quellen-Setup" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Post-Flight TLD-Kalibrierung</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/TLD-600 Post-Flight 1 und 2 (kleiner) Nettokurven.PNG" class="img-fluid rounded shadow-sm" alt="TLD Glühkurven" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/TLD-600 Post-Flight 1 und 2 (kleiner) Nettokurven.PNG" class="img-fluid rounded shadow-sm lazy-image" alt="TLD Glühkurven" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">TLD Glühkurvenanalyse</small>
                     </div>
                   </div>
@@ -322,11 +322,11 @@
                 <div class="col-lg-5">
                   <div class="row">
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Master_Thesis.jpg" class="img-fluid rounded shadow-sm" alt="Arbeit am TRIGA Reaktor" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Master_Thesis.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Arbeit am TRIGA Reaktor" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Probenplatzierung im TRIGA Reaktor</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Triga.jpg" class="img-fluid rounded shadow-sm" alt="TRIGA Reaktor bei Vollleistung" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Triga.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="TRIGA Reaktor bei Vollleistung" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Reaktor bei Vollleistung</small>
                     </div>
                   </div>
@@ -455,6 +455,35 @@
       link.classList.remove('active');
     });
     document.getElementById('mobile-lang-de').classList.add('active');
+  });
+  </script>
+
+  <!-- Lazy loading implementation for service page images -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lazy loading for service page images
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    
+    if (lazyImages.length > 0) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute('data-src');
+            if (src) {
+              img.src = src;
+              img.classList.remove('lazy-image');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
   });
   </script>
 

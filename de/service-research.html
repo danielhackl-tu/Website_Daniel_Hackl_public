@@ -151,11 +151,11 @@
                 <div class="col-lg-5">
                   <div class="row">
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Probenhalter_v1_CAD.png" class="img-fluid rounded shadow-sm" alt="CAD Design Probenhalter V1" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Probenhalter_v1_CAD.png" class="img-fluid rounded shadow-sm lazy-image" alt="CAD Design Probenhalter V1" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">CAD Design - Probenhalter V1</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="../assets/images/services/Sample_Holder_V1.jpg" class="img-fluid rounded shadow-sm" alt="Gefertigter Probenhalter V1" style="height: 200px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Sample_Holder_V1.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Gefertigter Probenhalter V1" style="height: 200px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Gefertigter Probenhalter V1</small>
                     </div>
                   </div>
@@ -205,7 +205,7 @@
                   </ul>
                 </div>
                 <div class="col-lg-5">
-                  <img src="../assets/images/services/Sampleholder_new.jpg" class="img-fluid rounded shadow-sm" alt="Probenhalter V2 Aufbau" style="height: 250px; width: 100%; object-fit: cover;">
+                  <img data-src="../assets/images/services/Sampleholder_new.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Probenhalter V2 Aufbau" style="height: 250px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                   <small class="d-block text-center mt-2 fw-bold">Probenhalter V2 - Fortgeschrittener Messaufbau</small>
                 </div>
               </div>
@@ -431,6 +431,35 @@
       link.classList.remove('active');
     });
     document.getElementById('mobile-lang-de').classList.add('active');
+  });
+  </script>
+
+  <!-- Lazy loading implementation for service page images -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lazy loading for service page images
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    
+    if (lazyImages.length > 0) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute('data-src');
+            if (src) {
+              img.src = src;
+              img.classList.remove('lazy-image');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
   });
   </script>
 

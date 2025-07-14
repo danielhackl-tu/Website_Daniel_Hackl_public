@@ -163,11 +163,11 @@
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                   <div class="row">
                     <div class="col-12 mb-3">
-                      <img src="../assets/images/services/PCB_2.jpg" class="img-fluid rounded shadow-sm" alt="PCB Lötarbeiten" style="height: 280px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/PCB_2.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="PCB Lötarbeiten" style="height: 280px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Präzisions-PCB-Montage</small>
                     </div>
                     <div class="col-12 mb-3">
-                      <img src="../assets/images/services/Neutron_Spin_measurement.jpg" class="img-fluid rounded shadow-sm" alt="Neutronenspin-Messgerät" style="height: 280px; width: 100%; object-fit: cover;">
+                      <img data-src="../assets/images/services/Neutron_Spin_measurement.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Neutronenspin-Messgerät" style="height: 280px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Neutronenspin-Messinstrumentierung</small>
                     </div>
                   </div>
@@ -355,6 +355,35 @@
     
     // Call once on load
     updateActiveLink();
+  });
+  </script>
+
+  <!-- Lazy loading implementation for service page images -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lazy loading for service page images
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    
+    if (lazyImages.length > 0) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute('data-src');
+            if (src) {
+              img.src = src;
+              img.classList.remove('lazy-image');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
   });
   </script>
 

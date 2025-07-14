@@ -149,7 +149,7 @@
                   </ul>
                 </div>
                 <div class="col-lg-4">
-                  <img src="assets/images/portfolio/Master_Thesis.jpg" alt="Superconductor Research" class="img-fluid rounded shadow-sm" style="height: 400px; width: 100%; object-fit: cover;">
+                  <img data-src="assets/images/portfolio/Master_Thesis.jpg" alt="Superconductor Research" class="img-fluid rounded shadow-sm lazy-image" style="height: 400px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                   <small class="d-block text-center mt-2 fw-bold">Research Work at TRIGA Reactor</small>
                 </div>
               </div>
@@ -219,19 +219,19 @@
                 <div class="col-lg-5">
                   <div class="row">
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="assets/images/services/Etching_1.jpg" class="img-fluid rounded shadow-sm" alt="Chemical Etching Process" style="height: 180px; width: 100%; object-fit: cover;">
+                      <img data-src="assets/images/services/Etching_1.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Chemical Etching Process" style="height: 180px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Chemical Etching of Superconductors</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="assets/images/services/Sampleholder_contacts_1.jpg" class="img-fluid rounded shadow-sm" alt="Contact Manufacturing" style="height: 180px; width: 100%; object-fit: cover;">
+                      <img data-src="assets/images/services/Sampleholder_contacts_1.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Contact Manufacturing" style="height: 180px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Precision Contact Manufacturing</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="assets/images/services/Etching_triple_bridge.jpg" class="img-fluid rounded shadow-sm" alt="Complex Etched Patterns" style="height: 180px; width: 100%; object-fit: cover;">
+                      <img data-src="assets/images/services/Etching_triple_bridge.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Complex Etched Patterns" style="height: 180px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Complex Etched Bridge Structures</small>
                     </div>
                     <div class="col-md-6 col-12 mb-3">
-                      <img src="assets/images/services/Soldering_Microscope.jpg" class="img-fluid rounded shadow-sm" alt="Microscope Soldering Work" style="height: 180px; width: 100%; object-fit: cover;">
+                      <img data-src="assets/images/services/Soldering_Microscope.jpg" class="img-fluid rounded shadow-sm lazy-image" alt="Microscope Soldering Work" style="height: 180px; width: 100%; object-fit: cover; background-color: #f8f9fa;" loading="lazy">
                       <small class="d-block text-center mt-2 fw-bold">Microscopic Soldering Operations</small>
                     </div>
                   </div>
@@ -327,6 +327,35 @@
       link.classList.remove('active');
     });
     document.getElementById('mobile-lang-en').classList.add('active');
+  });
+  </script>
+
+  <!-- Lazy loading implementation for service page images -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lazy loading for service page images
+    const lazyImages = document.querySelectorAll('.lazy-image');
+    
+    if (lazyImages.length > 0) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const src = img.getAttribute('data-src');
+            if (src) {
+              img.src = src;
+              img.classList.remove('lazy-image');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      lazyImages.forEach(img => imageObserver.observe(img));
+    }
   });
   </script>
 
