@@ -37,7 +37,7 @@ function loadImageWithFade(element, callback) {
   img.src = dataSrc;
 }
 
-// GDPR-compliant cache detection function
+// GDPR-compliant cache detection function - NON-BLOCKING
 const checkIfCached = (src) => {
   return new Promise((resolve) => {
     const img = new Image();
@@ -45,24 +45,24 @@ const checkIfCached = (src) => {
     
     img.onload = function() {
       const loadTime = performance.now() - startTime;
-      // If image loads very quickly (< 50ms), it's likely cached
+      // If image loads very quickly (< 30ms), it's likely cached
       // This is a technical performance metric, not user tracking
-      resolve(loadTime < 50);
+      resolve(loadTime < 30);
     };
     
     img.onerror = function() {
       resolve(false);
     };
     
-    // Set a very short timeout for cache check
-    setTimeout(() => resolve(false), 100);
+    // Much shorter timeout for non-blocking behavior
+    setTimeout(() => resolve(false), 50);
     
     img.src = src;
   });
 };
 
-// Enhanced hero background loading with cache detection
-const initializeHeroBackground = async () => {
+// Enhanced hero background loading with non-blocking cache detection
+const initializeHeroBackground = () => {
   const heroBg = document.getElementById('hero-bg');
   if (!heroBg) return;
   
@@ -77,45 +77,46 @@ const initializeHeroBackground = async () => {
     const gifImg = new Image();
     
     gifImg.onload = function() {
-      heroBg.style.transition = 'opacity 0.3s ease-in-out';
-      heroBg.src = gifImg.src;
+      // Only transition if we're still showing the static image
+      if (heroBg.src.includes('BG_first_frame.jpg')) {
+        heroBg.style.transition = 'opacity 0.3s ease-in-out';
+        heroBg.src = gifImg.src;
+      }
     };
     
     gifImg.onerror = function() {
       console.warn('GIF failed to load, keeping static image');
     };
     
+    // Start loading GIF in background
     gifImg.src = gifSrc;
   };
   
-  try {
-    // Check if GIF is likely cached using performance metrics only
-    const isCached = await checkIfCached(gifSrc);
-    
+  // Start loading GIF immediately but check cache status non-blocking
+  checkIfCached(gifSrc).then(isCached => {
     if (isCached) {
       // If cached, load immediately for smooth experience
       loadHeroGif();
     } else {
-      // If not cached, use lazy loading with appropriate timing
+      // If not cached, respect mobile/desktop timing
       if (isMobile) {
-        // On mobile, wait for page to be fully loaded
+        // On mobile, wait longer to ensure page is stable
         if (document.readyState === 'complete') {
-          setTimeout(loadHeroGif, 1000);
+          setTimeout(loadHeroGif, 800);
         } else {
           window.addEventListener('load', () => {
-            setTimeout(loadHeroGif, 1000);
+            setTimeout(loadHeroGif, 800);
           });
         }
       } else {
-        // Desktop: load after a short delay
-        setTimeout(loadHeroGif, 200);
+        // Desktop: load after short delay to let page stabilize
+        setTimeout(loadHeroGif, 300);
       }
     }
-  } catch (error) {
-    // Fallback to normal lazy loading
-    console.warn('Cache detection failed, using fallback loading');
-    setTimeout(loadHeroGif, isMobile ? 1000 : 200);
-  }
+  }).catch(() => {
+    // Fallback if cache detection fails
+    setTimeout(loadHeroGif, isMobile ? 800 : 300);
+  });
 };
 
 // Enhanced portrait loading with mobile-optimized Intersection Observer
@@ -176,7 +177,7 @@ const initializeMobileOptimizations = () => {
   });
 };
 
-// Swiper gallery initialization with proper error handling
+// Swiper gallery initialization with better error handling
 const initializeSwiperGalleries = () => {
   // Check if Swiper is available
   if (typeof Swiper === 'undefined') {
