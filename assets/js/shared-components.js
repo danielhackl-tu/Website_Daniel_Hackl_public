@@ -77,10 +77,10 @@ const initializeHeroBackground = () => {
     // On mobile, wait for page to be fully loaded
     if (document.readyState === 'complete') {
       // Add extra delay on mobile to ensure everything is loaded
-      setTimeout(loadHeroGif, 1000);
+      setTimeout(loadHeroGif, 100);
     } else {
       window.addEventListener('load', () => {
-        setTimeout(loadHeroGif, 1000);
+        setTimeout(loadHeroGif, 100);
       });
     }
   } else {
