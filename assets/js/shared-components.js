@@ -176,8 +176,21 @@ const initializeMobileOptimizations = () => {
   });
 };
 
-// Swiper gallery initialization
+// Swiper gallery initialization with proper error handling
 const initializeSwiperGalleries = () => {
+  // Check if Swiper is available
+  if (typeof Swiper === 'undefined') {
+    console.warn('Swiper not loaded yet, retrying...');
+    setTimeout(initializeSwiperGalleries, 100);
+    return;
+  }
+
+  // Check if swiper elements exist before initializing
+  const swiperElements = document.querySelectorAll('.swiper');
+  if (swiperElements.length === 0) {
+    return; // No swiper elements found, skip initialization
+  }
+
   // Initialize ANS Leadership Swiper Gallery
   const ansLeadershipSwiper = new Swiper('.ans-leadership-swiper', {
     slidesPerView: 1,
@@ -367,13 +380,16 @@ const updateActiveLanguageIndicators = () => {
   }
 };
 
-// Main initialization function
+// Main initialization function with better timing
 const initializeSharedComponents = () => {
+  // Initialize non-Swiper components immediately
   initializeHeroBackground();
   initializePortraitLoading();
   initializeMobileOptimizations();
-  initializeSwiperGalleries();
   updateActiveLanguageIndicators();
+  
+  // Initialize Swiper with delay to ensure it's loaded
+  setTimeout(initializeSwiperGalleries, 50);
 };
 
 // Initialize when DOM is ready
