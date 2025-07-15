@@ -37,6 +37,58 @@ function loadImageWithFade(element, callback) {
   img.src = dataSrc;
 }
 
+// Simplified hero background loading (based on working code)
+const initializeHeroBackground = () => {
+  const heroBg = document.getElementById('hero-bg');
+  if (!heroBg) return;
+  
+  const gifSrc = heroBg.getAttribute('data-src');
+  
+  if (!gifSrc) {
+    console.warn('Hero background data-src not found');
+    return;
+  }
+  
+  // Function to load GIF
+  const loadHeroGif = () => {
+    const gifImg = new Image();
+    
+    // Add timeout for mobile devices
+    const timeoutId = setTimeout(() => {
+      console.warn('GIF loading timeout - keeping static image');
+    }, isMobile ? 8000 : 12000);
+    
+    gifImg.onload = function() {
+      clearTimeout(timeoutId);
+      heroBg.style.transition = 'opacity 0.3s ease-in-out';
+      heroBg.src = gifImg.src;
+    };
+    
+    gifImg.onerror = function() {
+      clearTimeout(timeoutId);
+      console.warn('GIF failed to load, keeping static image');
+    };
+    
+    gifImg.src = gifSrc;
+  };
+  
+  // Mobile-optimized timing (based on working code)
+  if (isMobile) {
+    // On mobile, wait for page to be fully loaded
+    if (document.readyState === 'complete') {
+      // Add extra delay on mobile to ensure everything is loaded
+      setTimeout(loadHeroGif, 1000);
+    } else {
+      window.addEventListener('load', () => {
+        setTimeout(loadHeroGif, 1000);
+      });
+    }
+  } else {
+    // Desktop: load immediately after DOM is ready
+    setTimeout(loadHeroGif, 100);
+  }
+};
+
 // GDPR-compliant cache detection function - NON-BLOCKING
 const checkIfCached = (src) => {
   return new Promise((resolve) => {
@@ -58,73 +110,6 @@ const checkIfCached = (src) => {
     setTimeout(() => resolve(false), 50);
     
     img.src = src;
-  });
-};
-
-// Enhanced hero background loading with proper static-first approach
-const initializeHeroBackground = () => {
-  const heroBg = document.getElementById('hero-bg');
-  if (!heroBg) return;
-  
-  const gifSrc = heroBg.getAttribute('data-src');
-  if (!gifSrc) {
-    console.warn('Hero background data-src not found');
-    return;
-  }
-  
-  // Ensure we start with static image (this should already be set in HTML)
-  const staticSrc = heroBg.src || heroBg.getAttribute('src');
-  if (!staticSrc || !staticSrc.includes('BG_first_frame.jpg')) {
-    console.warn('Static background image not properly set');
-    return;
-  }
-  
-  // Function to load GIF in background and replace when ready
-  const loadGifInBackground = (delay = 0) => {
-    setTimeout(() => {
-      const gifImg = new Image();
-      
-      gifImg.onload = function() {
-        // Only replace if we're still showing the static image
-        if (heroBg.src.includes('BG_first_frame.jpg')) {
-          heroBg.style.transition = 'opacity 0.3s ease-in-out';
-          heroBg.src = gifImg.src;
-        }
-      };
-      
-      gifImg.onerror = function() {
-        console.warn('GIF failed to load, keeping static image');
-      };
-      
-      // Start loading GIF
-      gifImg.src = gifSrc;
-    }, delay);
-  };
-  
-  // Non-blocking cache check that doesn't affect initial display
-  checkIfCached(gifSrc).then(isCached => {
-    if (isCached) {
-      // If cached, load with minimal delay for smooth experience
-      loadGifInBackground(100);
-    } else {
-      // If not cached, use appropriate timing based on device
-      if (isMobile) {
-        // On mobile, wait for page to be stable
-        if (document.readyState === 'complete') {
-          loadGifInBackground(1200);
-        } else {
-          window.addEventListener('load', () => {
-            loadGifInBackground(1200);
-          });
-        }
-      } else {
-        // Desktop: load after page elements are settled
-        loadGifInBackground(500);
-      }
-    }
-  }).catch(() => {
-    // Fallback if cache detection fails
-    loadGifInBackground(isMobile ? 1200 : 500);
   });
 };
 
