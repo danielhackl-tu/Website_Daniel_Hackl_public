@@ -12,18 +12,12 @@
   <link href="../assets/img/Atom_Logo.png" rel="icon" type="image/png">
   <link href="../assets/img/Atom_Logo.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <!-- <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> -->
-
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="../assets/css/main.css" rel="stylesheet">
@@ -185,15 +179,15 @@
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                   <div class="d-flex flex-column align-items-center justify-content-around h-100">
                     <div class="text-center mb-4">
-                      <i class="fas fa-atom" style="font-size: 3rem; color: #0073BA;"></i>
+                      <i class="bi bi-radioactive" style="font-size: 3rem; color: #0073BA;"></i>
                       <p class="mt-2">Atomstruktur</p>
                     </div>
                     <div class="text-center mb-4">
-                      <i class="fas fa-magnet" style="font-size: 3rem; color: #0073BA;"></i>
+                      <i class="bi bi-magnet" style="font-size: 3rem; color: #0073BA;"></i>
                       <p class="mt-2">Magnetische Eigenschaften</p>
                     </div>
                     <div class="text-center">
-                      <i class="fas fa-thermometer-half" style="font-size: 3rem; color: #0073BA;"></i>
+                      <i class="bi bi-thermometer-half" style="font-size: 3rem; color: #0073BA;"></i>
                       <p class="mt-2">Thermische Analyse</p>
                     </div>
                   </div>
@@ -244,25 +238,25 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="application-card">
-                      <h5><i class="fas fa-bolt me-2"></i>Energieübertragung</h5>
+                      <h5><i class="bi bi-lightning me-2"></i>Energieübertragung</h5>
                       <p>Supraleitende Kabel für verlustfreie Energieübertragung und Smart-Grid-Anwendungen.</p>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="application-card">
-                      <h5><i class="fas fa-magnet me-2"></i>Fusionsenergie</h5>
+                      <h5><i class="bi bi-magnet me-2"></i>Fusionsenergie</h5>
                       <p>Hochfeld-supraleitende Magnete für Plasmaeinschluss in Fusionsreaktoren.</p>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="application-card">
-                      <h5><i class="fas fa-battery-full me-2"></i>Energiespeicherung</h5>
+                      <h5><i class="bi bi-battery-full me-2"></i>Energiespeicherung</h5>
                       <p>Supraleitende Magnetische Energiespeicher (SMES) für Netzstabilisierung.</p>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="application-card">
-                      <h5><i class="fas fa-satellite me-2"></i>Weltraumanwendungen</h5>
+                      <h5><i class="bi bi-rocket me-2"></i>Weltraumanwendungen</h5>
                       <p>Strahlungsresistente Materialien für weltraumbasierte Energiesysteme und Antrieb.</p>
                     </div>
                   </div>
@@ -280,6 +274,11 @@
     <div class="container">
       <div class="copyright text-center">
         <p>© <span>Copyright</span> <strong class="px-1 sitename">Daniel Hackl</strong> <span>Alle Rechte vorbehalten</span></p>
+      </div>
+      <div class="legal-links text-center mt-2">
+        <a href="impressum.html">Impressum</a>
+        <span class="mx-2">|</span>
+        <a href="datenschutz.html">Datenschutzerklärung</a>
       </div>
       <div class="social-links d-flex justify-content-center">
         <a href="https://github.com/danielhackl-tu" target="_blank"><i class="bi bi-github"></i></a>
@@ -327,6 +326,45 @@
       link.classList.remove('active');
     });
     document.getElementById('mobile-lang-de').classList.add('active');
+  });
+  </script>
+
+  <!-- Dynamic Table of Contents Script -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all service list links and sections
+    const serviceLinks = document.querySelectorAll('.services-list a');
+    const sections = document.querySelectorAll('#superconductors, #irradiation-effects, #characterization, #processing');
+    
+    // Function to update active link
+    function updateActiveLink() {
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150; // Offset for header
+        const sectionHeight = section.offsetHeight;
+        const scrollPosition = window.pageYOffset;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      // Update active states
+      serviceLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === '#' + currentSection) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', updateActiveLink);
+    
+    // Call once on load
+    updateActiveLink();
   });
   </script>
 

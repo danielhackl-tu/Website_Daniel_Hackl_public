@@ -17,6 +17,79 @@
   margin-right: 5px;
 }
 
+/* Legal Pages Styling */
+.legal-page {
+  font-family: var(--default-font);
+  background-color: #f8f9fa;
+}
+
+.legal-content {
+  padding: 60px 0;
+  min-height: calc(100vh - 160px);
+}
+
+.legal-header h1 {
+  color: var(--heading-color);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.legal-section {
+  background: white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(1, 41, 112, 0.1);
+}
+
+.legal-section h2 {
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.legal-section h3 {
+  color: var(--heading-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-details {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color);
+}
+
+.tech-details {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+/* Footer legal links styling */
+.legal-links {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.legal-links a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.legal-links a:hover {
+  color: var(--contrast-color);
+  text-decoration: underline;
+}
+
 /* Hero background styling */
 .hero {
   position: relative;
@@ -1682,4 +1755,44 @@
   .engagement-image-container .image-overlay {
     /* Desktop styles remain as they are */
   }
+}
+
+/* Fix scroll-to-section offset for service pages */
+/* Account for sticky header height when scrolling to sections */
+html {
+  scroll-padding-top: 100px; /* Adjust based on header height */
+}
+
+/* Alternative approach for sections with IDs */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
+/* Specific fix for service page sections */
+.service-page section[id] {
+  scroll-margin-top: 120px; /* Slightly more for service pages */
+}
+
+/* Service page heading targets */
+#programming,
+#measurement-control,
+#data-processing,
+#statistical-analysis,
+#thermal-analysis,
+#neutron-irradiation,
+#materials-characterization,
+#cryogenic-systems,
+#research-collaboration,
+#supervision,
+#project-management,
+#technical-writing,
+#radiation-protection,
+#nuclear-safety,
+#instrumentation-design,
+#measurement-systems,
+#energy-analysis,
+#efficiency-optimization,
+#renewable-integration,
+#energy-systems {
+  scroll-margin-top: 120px;
 }

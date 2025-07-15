@@ -18,12 +18,6 @@
   <link href="assets/img/Atom_Logo.png" rel="icon" type="image/svg+xml">
   <link href="assets/img/Atom_Logo.png" rel="apple-touch-icon">
   
-  <!-- Fonts -->
-  <!--
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  -->
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -31,12 +25,7 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   
-  <link rel="stylesheet" href="assets/css/flaticon.css">
-  <!--modernizr.min.js-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-  <!-- Include Font Awesome 5 or 6 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  
+  <link rel="stylesheet" href="assets/css/flaticon.css">  
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -196,7 +185,7 @@
 
           <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-radiation-alt"></i></div>
+              <div class="icon"><i class="bi bi-radioactive"></i></div>
               <h4><a href="service-safety.html" class="stretched-link">Radiation Protection</a></h4>
               <p>Proficient in radiation protection protocols, neutron flux measurement, and activity determination.</p>
             </div>
@@ -212,7 +201,7 @@
 
            <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-atom"></i></div>
+              <div class="icon"><i class="bi bi-diagram-3"></i></div>
               <h4><a href="service-materials.html" class="stretched-link">Materials Science</a></h4>
               <p>Specialized knowledge in high-temperature superconductors and neutron irradiation effects on materials.</p>
             </div>
@@ -1238,70 +1227,6 @@
       </div>
     </div>
 
-    <!-- Map and Contact Form Section -->
-    <div class="row mt-5 gy-4">
-      
-      <!-- Google Map Integration -->
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-        <div class="contact-map">
-          <h4 class="mb-3">
-            <i class="bi bi-geo-alt me-2"></i>
-            Find me in Vienna
-          </h4>
-          <div class="map-container">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10649.423445276909!2d16.38394!3d48.19856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d07074715b4b9%3A0x7ea4b460cf0feca5!2s1030%20Vienna%2C%20Austria!5e0!3m2!1sen!2sat!4v1640995200000!5m2!1sen!2sat" 
-              width="100%" 
-              height="550" 
-              style="border:0; border-radius: 10px;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-        </div>
-      </div><!-- End Map -->
-
-      <!-- Contact Form -->
-      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-        <div class="contact-form">
-          <h4 class="mb-3">
-            <i class="bi bi-chat-dots me-2"></i>
-            Send me a message
-          </h4>
-          <form action="forms/contact.php" method="post" class="php-email-form">
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <label for="name-field" class="pb-2">Your Name</label>
-                <input type="text" name="name" id="name-field" class="form-control" required="">
-              </div>
-              <div class="col-md-6">
-                <label for="email-field" class="pb-2">Your Email</label>
-                <input type="email" class="form-control" name="email" id="email-field" required="">
-              </div>
-              <div class="col-md-12">
-                <label for="subject-field" class="pb-2">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject-field" required="">
-              </div>
-              <div class="col-md-12">
-                <label for="message-field" class="pb-2">Message</label>
-                <textarea class="form-control" name="message" rows="5" id="message-field" required=""></textarea>
-              </div>
-              <div class="col-md-12 text-center">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-                <button type="submit">
-                  <i class="bi bi-send me-2"></i>Send Message
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div><!-- End Contact Form -->
-      
-    </div><!-- End Row -->
-
     <!-- Professional Interests Call-to-Action -->
     <div class="row mt-5">
       <div class="col-12" data-aos="fade-up" data-aos-delay="500">
@@ -1351,24 +1276,22 @@
   <footer id="footer" class="footer position-relative light-background">
     <div class="container">
       <div class="copyright text-center ">
-        <!-- Update Copyright -->
-         <p>© <span>Copyright</span> <strong class="px-1 sitename">Daniel Hackl</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Daniel Hackl</strong> <span>All Rights Reserved</span></p>
       </div>
       <div class="credits">
-        <!-- All Rights Reserved to BootstrapMade.com - REQUIRED BY LICENSE -->
         <p>Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a></p>
         
-        <!-- Additional attributions -->
+        <!-- Legal Links -->
+        <p class="legal-links">
+          <a href="legal-notice.html">Legal Notice</a> | 
+          <a href="dataprotection.html">Privacy Policy</a>
+        </p>
+        
         <p class="small text-muted">
           Template: <a href="https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/">DevFolio</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>.<br>
           Image attributions: 
           Favicon: Atom logo illustration generated by AI using Perplexity, June 2025.<br>
           TU Wien building image by <a href="https://commons.wikimedia.org/wiki/File:Technische_Universit%C3%A4t_Wien_mainbuilding_mainentrance_northview.jpg">Peter Haas</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a><br>
-          <!-- DMT logo by <a href="https://commons.wikimedia.org/w/index.php?curid=127095093">DMT VMK</a>, used under <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.<br>
-          TU Wien logo - By unknown author, <a href="https://commons.wikimedia.org/w/index.php?curid=51126670">Public Domain</a>, from <a href="https://www.tuwien.ac.at/en/services/public_relations_office/publishing_web_print/corporate_design/tu_logo/">TU Wien website</a>.<br>
-          Bildungsdirektion Wien logo © Bildungsdirektion Wien, used for reference purposes only from <a href="https://www.bildung-wien.gv.at/service/Presse/Logo-und-Verwendungsrichtlinies.html">official website</a>.<br>
-          NES logo © Nuclear Engineering Seibersdorf GmbH. Used for reference purposes only.<br>
-          JUNO logo © JUNO Consulting & Nuclear Engineering GmbH. Used for reference purposes only. -->
         </p>
       </div>
     </div>
@@ -1627,6 +1550,66 @@ document.addEventListener('DOMContentLoaded', function() {
       gifImg.src = heroBg.getAttribute('data-src');
     }, 0);
   }
+
+  // Email copy function for contact section
+  function copyEmail() {
+    const email = 'website@daniel-hackl.com';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(function() {
+        // Show success message
+        const button = event.target.closest('button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="bi bi-check-circle me-2"></i>Copied!';
+        button.classList.add('btn-success');
+        button.classList.remove('btn-outline-primary');
+        
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.classList.remove('btn-success');
+          button.classList.add('btn-outline-primary');
+        }, 2000);
+      }).catch(function() {
+        // Fallback for older browsers
+        copyEmailFallback(email);
+      });
+    } else {
+      // Fallback for older browsers
+      copyEmailFallback(email);
+    }
+  }
+
+  function copyEmailFallback(email) {
+    const textArea = document.createElement('textarea');
+    textArea.value = email;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+      document.execCommand('copy');
+      const button = event.target.closest('button');
+      const originalText = button.innerHTML;
+      button.innerHTML = '<i class="bi bi-check-circle me-2"></i>Copied!';
+      button.classList.add('btn-success');
+      button.classList.remove('btn-outline-primary');
+      
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-outline-primary');
+      }, 2000);
+    } catch (err) {
+      alert('Email address: ' + email);
+    }
+    
+    document.body.removeChild(textArea);
+  }
+
+  // Make copyEmail globally available
+  window.copyEmail = copyEmail;
 
   // Load portrait when it comes into view or immediately if already visible
   const portrait = document.querySelector('.portrait-lazy');

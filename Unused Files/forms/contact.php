@@ -1,4 +1,8 @@
 <?php
+// ⚠️  UNUSED FILE - This contact form is not active on the website
+// The main website uses direct email links instead of form submissions
+// This file is kept for reference only and can be safely deleted
+
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data and sanitize
