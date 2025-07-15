@@ -61,7 +61,7 @@ const checkIfCached = (src) => {
   });
 };
 
-// Enhanced hero background loading with non-blocking cache detection
+// Enhanced hero background loading with proper static-first approach
 const initializeHeroBackground = () => {
   const heroBg = document.getElementById('hero-bg');
   if (!heroBg) return;
@@ -72,50 +72,59 @@ const initializeHeroBackground = () => {
     return;
   }
   
-  // Function to load GIF with smooth transition
-  const loadHeroGif = () => {
-    const gifImg = new Image();
-    
-    gifImg.onload = function() {
-      // Only transition if we're still showing the static image
-      if (heroBg.src.includes('BG_first_frame.jpg')) {
-        heroBg.style.transition = 'opacity 0.3s ease-in-out';
-        heroBg.src = gifImg.src;
-      }
-    };
-    
-    gifImg.onerror = function() {
-      console.warn('GIF failed to load, keeping static image');
-    };
-    
-    // Start loading GIF in background
-    gifImg.src = gifSrc;
+  // Ensure we start with static image (this should already be set in HTML)
+  const staticSrc = heroBg.src || heroBg.getAttribute('src');
+  if (!staticSrc || !staticSrc.includes('BG_first_frame.jpg')) {
+    console.warn('Static background image not properly set');
+    return;
+  }
+  
+  // Function to load GIF in background and replace when ready
+  const loadGifInBackground = (delay = 0) => {
+    setTimeout(() => {
+      const gifImg = new Image();
+      
+      gifImg.onload = function() {
+        // Only replace if we're still showing the static image
+        if (heroBg.src.includes('BG_first_frame.jpg')) {
+          heroBg.style.transition = 'opacity 0.3s ease-in-out';
+          heroBg.src = gifImg.src;
+        }
+      };
+      
+      gifImg.onerror = function() {
+        console.warn('GIF failed to load, keeping static image');
+      };
+      
+      // Start loading GIF
+      gifImg.src = gifSrc;
+    }, delay);
   };
   
-  // Start loading GIF immediately but check cache status non-blocking
+  // Non-blocking cache check that doesn't affect initial display
   checkIfCached(gifSrc).then(isCached => {
     if (isCached) {
-      // If cached, load immediately for smooth experience
-      loadHeroGif();
+      // If cached, load with minimal delay for smooth experience
+      loadGifInBackground(100);
     } else {
-      // If not cached, respect mobile/desktop timing
+      // If not cached, use appropriate timing based on device
       if (isMobile) {
-        // On mobile, wait longer to ensure page is stable
+        // On mobile, wait for page to be stable
         if (document.readyState === 'complete') {
-          setTimeout(loadHeroGif, 800);
+          loadGifInBackground(1200);
         } else {
           window.addEventListener('load', () => {
-            setTimeout(loadHeroGif, 800);
+            loadGifInBackground(1200);
           });
         }
       } else {
-        // Desktop: load after short delay to let page stabilize
-        setTimeout(loadHeroGif, 300);
+        // Desktop: load after page elements are settled
+        loadGifInBackground(500);
       }
     }
   }).catch(() => {
     // Fallback if cache detection fails
-    setTimeout(loadHeroGif, isMobile ? 800 : 300);
+    loadGifInBackground(isMobile ? 1200 : 500);
   });
 };
 
