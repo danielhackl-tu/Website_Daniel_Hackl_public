@@ -1514,59 +1514,146 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- Lazy loading implementation for hero background and portrait -->
+<!-- Enhanced mobile-optimized lazy loading implementation -->
 <script>
-// Optimized lazy loading implementation for hero background and portrait
+// Enhanced lazy loading implementation with mobile optimization
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to load image with fade-in effect
+  
+  // Simple mobile detection without collecting any data
+  const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // Enhanced image loading function with better error handling
   function loadImageWithFade(element, callback) {
     const img = new Image();
+    const dataSrc = element.getAttribute('data-src');
+    
+    if (!dataSrc) {
+      console.warn('No data-src attribute found on element');
+      return;
+    }
+    
     img.onload = function() {
       element.src = img.src;
       element.style.transition = 'opacity 0.5s ease-in-out';
       element.style.opacity = '1';
       if (callback) callback();
     };
-    img.src = element.getAttribute('data-src');
+    
+    img.onerror = function() {
+      console.warn('Image failed to load:', dataSrc);
+      // On mobile, retry once after a delay
+      if (isMobile) {
+        setTimeout(() => {
+          img.src = dataSrc;
+        }, 1000);
+      }
+    };
+    
+    img.src = dataSrc;
   }
 
-  // Optimized hero background GIF loading - no artificial delays, async loading
+  // Enhanced hero background loading with mobile-specific optimizations
   const heroBg = document.getElementById('hero-bg');
   if (heroBg) {
-    // Start loading GIF immediately in background (async, non-blocking)
-    const gifImg = new Image();
-    gifImg.onload = function() {
-      // GIF loaded - transition immediately without delay
-      heroBg.style.transition = 'opacity 0.3s ease-in-out';
-      heroBg.src = gifImg.src;
-    };
-    gifImg.onerror = function() {
-      console.log('GIF failed to load, keeping static image');
+    const gifSrc = heroBg.getAttribute('data-src');
+    
+    if (!gifSrc) {
+      console.warn('Hero background data-src not found');
+      return;
+    }
+    
+    // Function to load GIF
+    const loadHeroGif = () => {
+      const gifImg = new Image();
+      
+      // Add timeout for mobile devices
+      const timeoutId = setTimeout(() => {
+        console.warn('GIF loading timeout - keeping static image');
+      }, isMobile ? 8000 : 12000);
+      
+      gifImg.onload = function() {
+        clearTimeout(timeoutId);
+        heroBg.style.transition = 'opacity 0.3s ease-in-out';
+        heroBg.src = gifImg.src;
+      };
+      
+      gifImg.onerror = function() {
+        clearTimeout(timeoutId);
+        console.warn('GIF failed to load, keeping static image');
+      };
+      
+      gifImg.src = gifSrc;
     };
     
-    // Start loading GIF immediately but asynchronously
-    // Use setTimeout with 0ms to make it truly async and non-blocking
-    setTimeout(() => {
-      gifImg.src = heroBg.getAttribute('data-src');
-    }, 0);
+    // Mobile-optimized timing
+    if (isMobile) {
+      // On mobile, wait for page to be fully loaded
+      if (document.readyState === 'complete') {
+        // Add extra delay on mobile to ensure everything is loaded
+        setTimeout(loadHeroGif, 1000);
+      } else {
+        window.addEventListener('load', () => {
+          setTimeout(loadHeroGif, 1000);
+        });
+      }
+    } else {
+      // Desktop: load immediately after DOM is ready
+      setTimeout(loadHeroGif, 100);
+    }
   }
 
-  // Load portrait when it comes into view or immediately if already visible
+  // Enhanced portrait loading with mobile-optimized Intersection Observer
   const portrait = document.querySelector('.portrait-lazy');
   if (portrait) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          loadImageWithFade(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '50px'
+    // More lenient settings for mobile
+    const observerOptions = {
+      threshold: isMobile ? 0.01 : 0.1, // Much lower threshold on mobile
+      rootMargin: isMobile ? '200px' : '50px' // Larger margin on mobile
+    };
+    
+    // Check if Intersection Observer is supported
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadImageWithFade(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      observer.observe(portrait);
+    } else {
+      // Fallback for browsers without Intersection Observer
+      loadImageWithFade(portrait);
+    }
+  }
+  
+  // Mobile-specific optimizations
+  if (isMobile) {
+    // Handle visibility change (mobile browsers often pause JS when tab is hidden)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        // Page is visible again - check if images need loading
+        const unloadedImages = document.querySelectorAll('img[data-src]:not([src*="assets/images"])');
+        unloadedImages.forEach(img => {
+          if (img.getBoundingClientRect().top < window.innerHeight) {
+            loadImageWithFade(img);
+          }
+        });
+      }
     });
     
-    observer.observe(portrait);
+    // Handle orientation change
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        // Re-trigger intersection observer checks after orientation change
+        const portraitImg = document.querySelector('.portrait-lazy');
+        if (portraitImg && !portraitImg.src.includes('portrait.jpg')) {
+          loadImageWithFade(portraitImg);
+        }
+      }, 500);
+    });
   }
 });
 </script>
