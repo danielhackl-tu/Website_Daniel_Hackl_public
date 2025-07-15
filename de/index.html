@@ -1386,7 +1386,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Lazy loading implementation for hero background and portrait -->
 <script>
-// Optimized lazy loading implementation for hero background and portrait
+// Fixed lazy loading implementation for hero background and portrait
 document.addEventListener('DOMContentLoaded', function() {
   // Function to load image with fade-in effect
   function loadImageWithFade(element, callback) {
@@ -1400,25 +1400,32 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = element.getAttribute('data-src');
   }
 
-  // Optimized hero background GIF loading - no artificial delays, async loading
+  // FIXED: Hero background GIF loading - ensure static frame loads first, then GIF
   const heroBg = document.getElementById('hero-bg');
   if (heroBg) {
-    // Start loading GIF immediately in background (async, non-blocking)
-    const gifImg = new Image();
-    gifImg.onload = function() {
-      // GIF loaded - transition immediately without delay
-      heroBg.style.transition = 'opacity 0.3s ease-in-out';
-      heroBg.src = gifImg.src;
-    };
-    gifImg.onerror = function() {
-      console.log('GIF failed to load, keeping static image');
-    };
+    // Ensure the static first frame is already loaded and visible
+    // The HTML already has src="../assets/images/about/BG_first_frame.jpg" so it loads immediately
     
-    // Start loading GIF immediately but asynchronously
-    // Use setTimeout with 0ms to make it truly async and non-blocking
+    // Only start loading GIF after a short delay to ensure page loads fast
     setTimeout(() => {
+      const gifImg = new Image();
+      gifImg.onload = function() {
+        // GIF is fully loaded - now transition smoothly
+        heroBg.style.transition = 'opacity 0.8s ease-in-out';
+        heroBg.style.opacity = '0.7';
+        
+        setTimeout(() => {
+          heroBg.src = gifImg.src;
+          heroBg.style.opacity = '1';
+        }, 400);
+      };
+      gifImg.onerror = function() {
+        console.log('GIF failed to load, keeping static image');
+      };
+      
+      // Start loading GIF after page has had time to render
       gifImg.src = heroBg.getAttribute('data-src');
-    }, 0);
+    }, 800); // Wait 800ms before starting GIF load
   }
 
   // Load portrait when it comes into view or immediately if already visible
@@ -1445,21 +1452,9 @@ function copyEmail() {
   const email = 'website@daniel-hackl.com';
   
   if (navigator.clipboard && window.isSecureContext) {
-    // Modern async clipboard API
     navigator.clipboard.writeText(email).then(function() {
-      // Success feedback
-      const button = event.target.closest('button');
-      const originalText = button.innerHTML;
-      button.innerHTML = '<i class="bi bi-check-circle me-2"></i>E-Mail kopiert!';
-      button.classList.remove('btn-outline-primary');
-      button.classList.add('btn-success');
-      
-      setTimeout(function() {
-        button.innerHTML = originalText;
-        button.classList.remove('btn-success');
-        button.classList.add('btn-outline-primary');
-      }, 2000);
-    }, function(err) {
+      showCopySuccess();
+    }).catch(function() {
       copyEmailFallback(email);
     });
   } else {
@@ -1480,21 +1475,16 @@ function copyEmailFallback(email) {
   
   try {
     document.execCommand('copy');
-    const button = event.target.closest('button');
-    const originalText = button.innerHTML;
-    button.innerHTML = '<i class="bi bi-check-circle me-2"></i>E-Mail kopiert!';
-    button.classList.remove('btn-outline-primary');
-    button.classList.add('btn-success');
-    
-    setTimeout(function() {
-      button.innerHTML = originalText;
-      button.classList.remove('btn-success');
-      button.classList.add('btn-outline-primary');
-    }, 2000);
+    showCopySuccess();
   } catch (err) {
-    alert('E-Mail-Adresse: ' + email);
+    alert('Email address: ' + email);
   }
   
-  textArea.remove();
+  document.body.removeChild(textArea);
+}
+
+function showCopySuccess() {
+  // Show success message logic here if needed
+  console.log('Email copied to clipboard');
 }
 </script>
