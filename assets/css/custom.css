@@ -424,16 +424,20 @@ li.no-tick {
   position: absolute;
   bottom: 20px;
   left: 20px;
+  display: inline-block;
   background: rgba(0, 115, 186, 0.9);
   color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 6px 12px;      /* Reduced padding */
+  border-radius: 18px;    /* Slightly smaller radius */
+  font-size: 13px;        /* Slightly smaller font */
   font-weight: 600;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.4s ease;
   z-index: 10;
+  white-space: normal;
+  max-width: 75%;         /* Tighter max width */
+  box-sizing: border-box;
 }
 
 .engagement .dach-conference-swiper:hover .slide-caption {
