@@ -17,6 +17,13 @@
   margin-right: 5px;
 }
 
+/* Remove bullet for .no-tick in any ul */
+li.no-tick {
+  list-style-type: none !important;
+  position: relative;
+  padding-left: 0 !important;
+}
+
 /* Legal Pages Styling */
 .legal-page {
   font-family: var(--default-font);
@@ -325,6 +332,10 @@
   color: var(--accent-color);
   font-weight: bold;
   font-size: 16px;
+}
+
+.engagement .engagement-highlights li.no-tick:before {
+  content: "";
 }
 
 /* Large Image Styling */
