@@ -37,7 +37,7 @@ function loadImageWithFade(element, callback) {
   img.src = dataSrc;
 }
 
-// Simplified hero background loading (based on working code)
+// Simplified hero background loading (unified timing for all devices)
 const initializeHeroBackground = () => {
   const heroBg = document.getElementById('hero-bg');
   if (!heroBg) return;
@@ -53,10 +53,10 @@ const initializeHeroBackground = () => {
   const loadHeroGif = () => {
     const gifImg = new Image();
     
-    // Add timeout for mobile devices
+    // Unified timeout for all devices
     const timeoutId = setTimeout(() => {
       console.warn('GIF loading timeout - keeping static image');
-    }, isMobile ? 8000 : 12000);
+    }, 12000);
     
     gifImg.onload = function() {
       clearTimeout(timeoutId);
@@ -72,21 +72,8 @@ const initializeHeroBackground = () => {
     gifImg.src = gifSrc;
   };
   
-  // Mobile-optimized timing (based on working code)
-  if (isMobile) {
-    // On mobile, wait for page to be fully loaded
-    if (document.readyState === 'complete') {
-      // Add extra delay on mobile to ensure everything is loaded
-      setTimeout(loadHeroGif, 100);
-    } else {
-      window.addEventListener('load', () => {
-        setTimeout(loadHeroGif, 100);
-      });
-    }
-  } else {
-    // Desktop: load immediately after DOM is ready
-    setTimeout(loadHeroGif, 100);
-  }
+  // Unified 100ms delay for all devices (proven to work optimally)
+  setTimeout(loadHeroGif, 100);
 };
 
 // GDPR-compliant cache detection function - NON-BLOCKING
@@ -374,6 +361,7 @@ const updateActiveLanguageIndicators = () => {
     activeMobileLangLink.classList.add('active');
   }
 };
+
 
 // Main initialization function with better timing
 const initializeSharedComponents = () => {
